@@ -15,15 +15,15 @@ public class MobileInput : MonoBehaviour
     [SerializeField]
     private Image actionBtn;
 
-    [SerializeField]
-    private Text display;
-
     private Vector2 dragOffset;
 
     [SerializeField]
     private float maxStickOffset = 10;
 
     private Canvas canvas;
+
+    [SerializeField]
+    private bool keyboardMode;
 
     public static Vector2 Axes { private set; get; }
 
@@ -41,8 +41,14 @@ public class MobileInput : MonoBehaviour
 
     private void Update()
     {
-        UpdateDisplayText();
+        if (!keyboardMode) return;
+
+        Axes = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+        ActionDown = Input.GetButtonDown("Jump");
+        Action = Input.GetButton("Jump");
+        ActionUp = Input.GetButtonUp("Jump");
     }
+
 
     private void LateUpdate()
     {
@@ -73,7 +79,7 @@ public class MobileInput : MonoBehaviour
             }
             else
             {
-                Axes = stickPos / magnitude;
+                Axes = stickPos / maxStickOffset;
             }
         }
         stick.rectTransform.anchoredPosition = stickPos;
@@ -97,11 +103,6 @@ public class MobileInput : MonoBehaviour
         ActionUp = true;
         Action = false;
         actionBtn.color = Color.white;
-    }
-
-    private void UpdateDisplayText()
-    {
-        display.text = "axes: " + Axes + "  action: " + Action;
     }
 
     private void OnDrawGizmosSelected()
