@@ -51,7 +51,7 @@ public class Bullet : MonoBehaviour
         var damageable = collision.GetComponent<IDamageable>();
         if (damageable != null)
         {
-            damageable.TakeDamage(damage);
+            damageable.TakeDamage(Mathf.RoundToInt(damage));
         }
         Destroy(gameObject);
     }

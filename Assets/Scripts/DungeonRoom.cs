@@ -14,7 +14,7 @@ public class DungeonRoom
     public Vector2 position;
 
 
-    public void AddTiles()
+    public void SetTiles(float obstacleChance = 0)
     {
         var centerTilePos = DungeonGenerator.Instance.tilemap.WorldToCell(position);
         for (int x = -halfSize.x; x < halfSize.x; x++)
@@ -66,6 +66,13 @@ public class DungeonRoom
                         tileToPlace = DungeonGenerator.Wall;
                     }
                 }
+                else
+                {
+                    if (Random.Range(0f, 1f) < obstacleChance)
+                    {
+                        tileToPlace = DungeonGenerator.Obstacle;
+                    }
+                }
                 DungeonGenerator.Instance.tilemap.SetTile(new Vector3Int((int)position.x + x, (int)position.y + y, 0), tileToPlace);
             }
         }
@@ -114,8 +121,21 @@ public class DungeonRoom
         bool vertical = dir.y != 0;
         var roomPos = position + dir * (roomHalfSize + connectorHalfLength);
         var connector = new DungeonRoom(connectorHalfWidth, connectorHalfLength, roomPos, vertical);
-        connector.AddTiles();
+        connector.SetTiles();
         roomPos += dir * (roomHalfSize + connectorHalfLength);
         return new DungeonRoom(roomHalfSize, roomExitChance, idx.x + dir.x, idx.y + dir.y, roomPos);
+    }
+
+    public bool IsDeadEnd()
+    {
+        int numExits = 0;
+        foreach (var exit in exits.Values)
+        {
+            if (exit)
+            {
+                numExits++;
+            }
+        }
+        return numExits == 1;
     }
 }

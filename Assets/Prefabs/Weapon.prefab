@@ -45,19 +45,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8db664186d924834baf15c0c9f4f9da7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fireRate: 1
-  damage: 1
-  bulletSpeed: 3
+  fireRate: 10
+  damage: 2
+  bulletSpeed: 6
   bulletLifespan: -1
   range: 5
   inaccuracy: 0
   maxInaccuracyAngle: 10
-  magSize: 10
-  maxAmmo: 30
+  magSize: 25
+  maxAmmo: 52
   reloadDuration: 2
   bulletSpawnPoint: {fileID: 5860467958057419241}
   bulletPrefab: {fileID: 8560079003430179171, guid: 9539c95dfd70ec9479ea4eadf7666334,
     type: 3}
+  team: 0
 --- !u!1 &5860467958057419246
 GameObject:
   m_ObjectHideFlags: 0
