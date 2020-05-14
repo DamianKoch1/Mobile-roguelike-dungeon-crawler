@@ -1,5 +1,6 @@
 # Mobile-roguelike-dungeon-crawler
-! [WIP] ! 
+! [project is WIP] !
+
 Contains randomized tilemap dungeon generator, basic mobile controls, one weapon, enemies aren't finished yet.
 
 ![thumbnail](/Images/thumbnail.png)
